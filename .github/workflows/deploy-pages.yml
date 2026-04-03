@@ -1,0 +1,43 @@
+name: Deploy EstateAI to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - claude/real-estate-photo-app-oo0nu
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web bundle
+        run: EXPO_OFFLINE=1 npx expo export --platform web
+        env:
+          CI: true
+
+      - name: Add .nojekyll
+        run: touch dist/.nojekyll
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true
+          commit_message: 'Deploy: ${{ github.event.head_commit.message }}'
