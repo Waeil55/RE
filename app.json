@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "EstateAI",
+    "slug": "estateai",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F172A"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.estateai.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "EstateAI needs camera access to capture listing photos for AI enhancement.",
+        "NSPhotoLibraryUsageDescription": "EstateAI needs photo library access to select and enhance listing photos.",
+        "NSLocationWhenInUseUsageDescription": "EstateAI uses your location to show nearby properties."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0F172A"
+      },
+      "package": "com.estateai.app",
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "EstateAI needs access to your photos to select listing images.",
+          "cameraPermission": "EstateAI needs your camera to capture listing photos."
+        }
+      ],
+      "expo-camera"
+    ]
+  }
+}
